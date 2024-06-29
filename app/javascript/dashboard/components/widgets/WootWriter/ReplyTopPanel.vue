@@ -11,7 +11,7 @@
       </woot-button>
 
       <woot-button
-        class="button--note"
+        class="button--note hidden"
         variant="clear"
         color-scheme="warning"
         :class="noteButtonClass"
