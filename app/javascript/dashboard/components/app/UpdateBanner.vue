@@ -45,7 +45,7 @@ export default {
         this.globalConfig.displayManifest &&
         this.updateAvailable &&
         !this.isVersionNotificationDismissed(this.latestChatwootVersion) &&
-        this.isAdmin
+        this.isSuperAdmin
       );
     },
   },
