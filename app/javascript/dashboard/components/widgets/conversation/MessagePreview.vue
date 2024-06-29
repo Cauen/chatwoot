@@ -32,13 +32,40 @@
       {{ parsedLastMessage }}
     </span>
     <span v-else-if="message.attachments">
-      <fluent-icon
-        v-if="attachmentIcon && showMessageType"
-        size="16"
-        class="-mt-0.5 align-middle inline-block text-slate-600 dark:text-slate-300"
-        :icon="attachmentIcon"
-      />
-      {{ $t(`${attachmentMessageContent}`) }}
+      <template v-for="(attachment, index) in message.attachments">
+        <div
+          v-if="attachment.file_type === 'image'"
+          :key="index"
+          class="flex flex-col gap-2"
+        >
+          <img :src="attachment.data_url" alt="Image Attachment" />
+          <a
+            :target="`_blank`"
+            :href="`/app/accounts/${attachment.account_id}/conversations/${message.conversation_id}?messageId=${attachment.message_id}`"
+            class="flex gap-2 items-center"
+          >
+            <fluent-icon
+              v-if="attachmentIcon"
+              :key="index"
+              size="16"
+              class="align-middle inline-block text-slate-600 dark:text-slate-300"
+              :icon="attachmentIcon"
+            />
+            <!-- Untranslated -->
+            <span>Abrir em nova aba</span>
+          </a>
+        </div>
+        <template v-else>
+          <fluent-icon
+            v-if="attachmentIcon && showMessageType"
+            :key="index"
+            size="16"
+            class="-mt-0.5 align-middle inline-block text-slate-600 dark:text-slate-300"
+            :icon="attachmentIcon"
+          />
+          {{ $t(`${attachmentMessageContent}`) }}
+        </template>
+      </template>
     </span>
     <span v-else>
       {{ defaultEmptyMessage || $t('CHAT_LIST.NO_CONTENT') }}
