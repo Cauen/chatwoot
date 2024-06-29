@@ -21,6 +21,7 @@ export const initializeAnalyticsEvents = () => {
 };
 
 const initializeAudioAlerts = user => {
+  // console.log({ initializeAudioAlertsUser: user });
   const { ui_settings: uiSettings } = user || {};
   const {
     always_play_audio_alert: alwaysPlayAudioAlert,
@@ -47,6 +48,7 @@ export const initializeChatwootEvents = () => {
     }
   });
   window.bus.$on(CHATWOOT_SET_USER, ({ user }) => {
+    // console.log('windows bus user', user);
     if (window.$chatwoot) {
       window.$chatwoot.setUser(user.email, {
         avatar_url: user.avatar_url,

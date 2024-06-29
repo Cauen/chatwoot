@@ -40,12 +40,14 @@ export default {
       });
     },
     shouldShowBanner() {
+      // console.log({ shouldShowBannerIsAdmin: this.isSuperAdmin });
+
       return (
         !this.userDismissedBanner &&
         this.globalConfig.displayManifest &&
         this.updateAvailable &&
         !this.isVersionNotificationDismissed(this.latestChatwootVersion) &&
-        this.isAdmin
+        this.isSuperAdmin
       );
     },
   },

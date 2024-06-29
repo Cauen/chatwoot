@@ -63,6 +63,7 @@ export default {
   },
 
   updateUISettings({ uiSettings }) {
+    // console.log({ updateUISettings3: uiSettings });
     return axios.put(endPoints('profileUpdate').url, {
       profile: { ui_settings: uiSettings },
     });

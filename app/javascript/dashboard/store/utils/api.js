@@ -18,6 +18,7 @@ export const setLoadingStatus = (state, status) => {
 };
 
 export const setUser = user => {
+  // console.log({ setUser: user });
   window.bus.$emit(CHATWOOT_SET_USER, { user });
   window.bus.$emit(ANALYTICS_IDENTITY, { user });
 };
@@ -27,6 +28,7 @@ export const getHeaderExpiry = response =>
 
 export const setAuthCredentials = response => {
   const expiryDate = getHeaderExpiry(response);
+  // console.log('SET AUTH CREDENTIALS');
   Cookies.set('cw_d_session_info', response.headers, {
     expires: differenceInDays(expiryDate, new Date()),
   });

@@ -501,7 +501,10 @@ export default {
       this.updateUISettings({
         enable_audio_alerts: this.enableAudioAlerts,
       });
+
+      // console.log({ enableAudioAlerts: this.enableAudioAlerts });
       this.showAlert(this.$t('PROFILE_SETTINGS.FORM.API.UPDATE_SUCCESS'));
+      // this.showAlert('ENABLE AUDIO ALERTS UPDATE');
     },
     handleAudioAlertConditions(e) {
       let condition = e.target.value;
@@ -519,6 +522,8 @@ export default {
     handleAudioToneChange(e) {
       this.updateUISettings({ notification_tone: e.target.value });
       this.showAlert(this.$t('PROFILE_SETTINGS.FORM.API.UPDATE_SUCCESS'));
+      // this.showAlert('TONE UPDATE AND SAVE');
+      // console.log({ notification_tone: e.target.value });
     },
     toggleInput(selected, current) {
       if (selected.includes(current)) {

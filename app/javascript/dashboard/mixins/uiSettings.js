@@ -55,6 +55,7 @@ export default {
   },
   methods: {
     updateUISettings(uiSettings = {}) {
+      // console.log('UPDATE UI SETTINGS 2', uiSettings);
       this.$store.dispatch('updateUISettings', {
         uiSettings: {
           ...this.uiSettings,

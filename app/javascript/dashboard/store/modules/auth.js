@@ -94,6 +94,7 @@ export const getters = {
 export const actions = {
   async validityCheck(context) {
     try {
+      // console.log('validityCheck');
       const response = await authAPI.validityCheck();
       const currentUser = response.data.payload.data;
       setUser(currentUser);
@@ -106,6 +107,7 @@ export const actions = {
   },
   async setUser({ commit, dispatch }) {
     if (authAPI.hasAuthCookie()) {
+      // console.log('Dispatch validityCheck');
       await dispatch('validityCheck');
     } else {
       commit(types.CLEAR_USER);
@@ -135,11 +137,13 @@ export const actions = {
   },
 
   updateUISettings: async ({ commit }, params) => {
+    // console.log('UPDATING UI SETTINGS');
     try {
       commit(types.SET_CURRENT_USER_UI_SETTINGS, params);
       const response = await authAPI.updateUISettings(params);
       commit(types.SET_CURRENT_USER, response.data);
     } catch (error) {
+      // console.log({ error });
       // Ignore error
     }
   },
@@ -201,9 +205,11 @@ export const mutations = {
     _state.currentUser = initialState.currentUser;
   },
   [types.SET_CURRENT_USER](_state, currentUser) {
+    // console.log('SET CURRENT USER');
     Vue.set(_state, 'currentUser', currentUser);
   },
   [types.SET_CURRENT_USER_UI_SETTINGS](_state, { uiSettings }) {
+    // console.log('SET UI SETTINGS');
     Vue.set(_state, 'currentUser', {
       ..._state.currentUser,
       ui_settings: {
