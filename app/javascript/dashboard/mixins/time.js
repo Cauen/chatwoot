@@ -11,12 +11,12 @@ export default {
       const unixTime = fromUnixTime(time);
       return format(unixTime, dateFormat);
     },
-    messageTimestamp(time, dateFormat = 'MMM d, yyyy') {
+    messageTimestamp(time, dateFormat = 'dd/MM, HH:mm:ss') {
       const messageTime = fromUnixTime(time);
       const now = new Date();
       const messageDate = format(messageTime, dateFormat);
       if (!isSameYear(messageTime, now)) {
-        return format(messageTime, 'LLL d y, h:mm a');
+        return format(messageTime, 'dd/MM/yyyy, HH:mm:ss');
       }
       return messageDate;
     },

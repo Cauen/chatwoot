@@ -236,7 +236,7 @@ export default {
     readableTime() {
       const { created_at: createdAt } = this.activeAttachment;
       if (!createdAt) return '';
-      return this.messageTimestamp(createdAt, 'LLL d yyyy, h:mm a') || '';
+      return this.messageTimestamp(createdAt) || '';
     },
     isImage() {
       return this.activeFileType === ALLOWED_FILE_TYPES.IMAGE;

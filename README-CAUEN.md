@@ -31,5 +31,5 @@ add widget inbox and execute code locally
 
 ## Deploying
 
-docker build -t -t chatwoot/chatwoot:latest -t chatwoot/chatwoot:3.10.2-custom -f ./docker/Dockerfile .
+docker build -t chatwoot/chatwoot:latest -t chatwoot/chatwoot:3.10.2-custom -f ./docker/Dockerfile .
 docker push cauedocker/chatwoot --all-tags

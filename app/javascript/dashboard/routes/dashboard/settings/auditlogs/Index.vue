@@ -38,12 +38,7 @@
                 {{ generateLogText(auditLogItem) }}
               </td>
               <td class="whitespace-nowrap break-all">
-                {{
-                  messageTimestamp(
-                    auditLogItem.created_at,
-                    'MMM dd, yyyy hh:mm a'
-                  )
-                }}
+                {{ messageTimestamp(auditLogItem.created_at) }}
               </td>
               <td class="w-[8.75rem]">
                 {{ auditLogItem.remote_address }}

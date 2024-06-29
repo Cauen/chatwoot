@@ -7,4 +7,5 @@
 - [x] feat: Ao clicar numa menção, ir até ela e destacar (destaque agora dura 10 segundos) (Não deu pra resolver o problema que se a mensagem mencioanda não tiver carregada, mostrar a mensagem ou mesmo o link)
 - [x] feat: Removendo possibilidade de criar mensagem privada (em prol de forçar usuários a inserir informações no painel lateral)
 - [x] feat: Alterar forma de notificações de som em tempo real: https://github.com/chatwoot/chatwoot/pull/9634
-- [ ] feat: Mostrar troca de dia igual o whatsapp
+- [x] feat: Nova formatação de data e hora no envio da mensagem, de Jun 29, 5:50 PM para 29/06, 17:50:00
+- [ ] feat: Acima da mensagem mostrar troca de dia igual o whatsapp
