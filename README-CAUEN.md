@@ -28,3 +28,8 @@ add widget inbox and execute code locally
     })
   }
 })(document,"script");
+
+## Deploying
+
+docker build -t -t chatwoot/chatwoot:latest -t chatwoot/chatwoot:3.10.2-custom -f ./docker/Dockerfile .
+docker push cauedocker/chatwoot --all-tags
