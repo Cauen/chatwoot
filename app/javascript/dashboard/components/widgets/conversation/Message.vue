@@ -486,6 +486,10 @@ export default {
     data() {
       this.hasMediaLoadError = false;
     },
+    // eslint-disable-next-line func-names
+    '$route.query.messageId': function () {
+      this.setupHighlightTimer();
+    },
   },
   mounted() {
     this.hasMediaLoadError = false;
@@ -555,7 +559,7 @@ export default {
       }
 
       this.showBackgroundHighlight = true;
-      const HIGHLIGHT_TIMER = 1000;
+      const HIGHLIGHT_TIMER = 10000;
       this.higlightTimeout = setTimeout(() => {
         this.showBackgroundHighlight = false;
       }, HIGHLIGHT_TIMER);

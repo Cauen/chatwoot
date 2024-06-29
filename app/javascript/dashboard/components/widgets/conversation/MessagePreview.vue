@@ -39,9 +39,8 @@
           class="flex flex-col gap-2"
         >
           <img :src="attachment.data_url" alt="Image Attachment" />
-          <a
-            :target="`_blank`"
-            :href="`/app/accounts/${attachment.account_id}/conversations/${message.conversation_id}?messageId=${attachment.message_id}`"
+          <router-link
+            :to="`/app/accounts/${attachment.account_id}/conversations/${message.conversation_id}?messageId=${message.id}`"
             class="flex gap-2 items-center"
           >
             <fluent-icon
@@ -52,8 +51,8 @@
               :icon="attachmentIcon"
             />
             <!-- Untranslated -->
-            <span>Abrir em nova aba</span>
-          </a>
+            <span>Ir até a mensagem (e destacá-la)</span>
+          </router-link>
         </div>
         <template v-else>
           <fluent-icon
