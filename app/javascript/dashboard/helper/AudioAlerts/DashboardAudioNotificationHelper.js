@@ -5,6 +5,11 @@ import {
   getAlertAudio,
   initOnEvents,
 } from 'shared/helpers/AudioNotificationHelper';
+import {
+  ROLES,
+  CONVERSATION_PERMISSIONS,
+} from 'dashboard/constants/permissions.js';
+import { getUserPermissions } from 'dashboard/helper/permissionsHelper.js';
 
 const NOTIFICATION_TIME = 30000;
 
@@ -14,12 +19,13 @@ class DashboardAudioNotificationHelper {
     this.audioAlertType = 'none';
     this.playAlertOnlyWhenHidden = true;
     this.alertIfUnreadConversationExist = false;
+    this.currentUser = null;
     this.currentUserId = null;
     this.audioAlertTone = 'ding';
   }
 
   setInstanceValues = ({
-    currentUserId,
+    currentUser,
     alwaysPlayAudioAlert,
     alertIfUnreadConversationExist,
     audioAlertType,
@@ -28,7 +34,8 @@ class DashboardAudioNotificationHelper {
     this.audioAlertType = audioAlertType;
     this.playAlertOnlyWhenHidden = !alwaysPlayAudioAlert;
     this.alertIfUnreadConversationExist = alertIfUnreadConversationExist;
-    this.currentUserId = currentUserId;
+    this.currentUser = currentUser;
+    this.currentUserId = currentUser.id;
     this.audioAlertTone = audioAlertTone;
     initOnEvents.forEach(e => {
       document.addEventListener(e, this.onAudioListenEvent, false);
@@ -68,6 +75,10 @@ class DashboardAudioNotificationHelper {
   };
 
   executeRecurringNotification = () => {
+    if (!window.WOOT || !window.WOOT.$store) {
+      this.clearSetTimeout();
+      return;
+    }
     const mineConversation = window.WOOT.$store.getters.getMineChats({
       assigneeType: 'me',
       status: 'open',
@@ -131,6 +142,20 @@ class DashboardAudioNotificationHelper {
     return !hasAssigneeId;
   };
 
+  isUserHasConversationPermission = () => {
+    const currentAccountId = window.WOOT.$store.getters.getCurrentAccountId;
+    // Get the user permissions for the current account
+    const userPermissions = getUserPermissions(
+      this.currentUser,
+      currentAccountId
+    );
+    // Check if the user has the required permissions
+    const hasRequiredPermission = [...ROLES, ...CONVERSATION_PERMISSIONS].some(
+      permission => userPermissions.includes(permission)
+    );
+    return hasRequiredPermission;
+  };
+
   shouldNotifyOnMessage = message => {
     if (this.audioAlertType === 'mine_and_unassigned') {
       return (
@@ -145,6 +170,11 @@ class DashboardAudioNotificationHelper {
   };
 
   onNewMessage = message => {
+    // If the user does not have the permission to view the conversation, then dismiss the alert
+    if (!this.isUserHasConversationPermission()) {
+      return;
+    }
+
     // If the message is sent by the current user or the
     // correct notification is not enabled, then dismiss the alert
     if (
