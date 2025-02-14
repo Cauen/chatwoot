@@ -31,6 +31,10 @@ add widget inbox and execute code locally
 
 ## Deploying
 
-docker build -t cauedocker/chatwoot:latest -t cauedocker/chatwoot:3.10.2-custom.2 -f ./docker/Dockerfile . && docker push cauedocker/chatwoot --all-tags
+docker build -t cauedocker/chatwoot:latest -t cauedocker/chatwoot:3.13.0-custom.1 -f ./docker/Dockerfile . && docker push cauedocker/chatwoot --all-tags
 
-<!-- docker tag chatwoot/chatwoot:3.10.2-custom.2 cauedocker/chatwoot:latest -->
+<!-- docker tag chatwoot/chatwoot:3.13.0-custom.1 cauedocker/chatwoot:latest -->
+
+## Updating Docker
+
+docker compose down && docker compose pull && docker compose up -d && docker exec -it $(basename $(pwd))-rails-1 sh -c 'RAILS_ENV=production bundle exec rails db:chatwoot_prepare'
