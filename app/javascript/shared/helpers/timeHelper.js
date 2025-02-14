@@ -22,12 +22,12 @@ export const messageStamp = (time, dateFormat = 'h:mm a') => {
  * @param {string} [dateFormat='MMM d, yyyy'] - Desired date format.
  * @returns {string} Formatted date string.
  */
-export const messageTimestamp = (time, dateFormat = 'MMM d, yyyy') => {
+export const messageTimestamp = (time, dateFormat = 'dd/MM, HH:mm:ss') => {
   const messageTime = fromUnixTime(time);
   const now = new Date();
   const messageDate = format(messageTime, dateFormat);
   if (!isSameYear(messageTime, now)) {
-    return format(messageTime, 'LLL d y, h:mm a');
+    return format(messageTime, 'dd/MM/yyyy, HH:mm:ss');
   }
   return messageDate;
 };
