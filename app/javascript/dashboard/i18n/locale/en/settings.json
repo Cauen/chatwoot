@@ -66,6 +66,7 @@
         "ALERT_TYPES": {
           "NONE": "None",
           "MINE": "Assigned",
+          "MINE_AND_UNASSIGNED": "Mine and unassigned",
           "ALL": "All"
         },
         "ALERT_TYPE": {
