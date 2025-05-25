@@ -73,6 +73,11 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
   end
 
   def send_text_message(phone_number, message)
+    content = message.content
+    if [4, 5].include?(message.account_id) && message.sender.present?
+      content = "**#{message.sender.name}:**\n#{content}"
+    end
+
     response = HTTParty.post(
       "#{phone_id_path}/messages",
       headers: api_headers,
@@ -80,7 +85,7 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
         messaging_product: 'whatsapp',
         context: whatsapp_reply_context(message),
         to: phone_number,
-        text: { body: message.content },
+        text: { body: content },
         type: 'text'
       }.to_json
     )
