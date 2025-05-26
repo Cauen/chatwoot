@@ -166,7 +166,7 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
     agent_name = message.sender&.available_name || message.sender&.name
     return message.content unless agent_name
 
-    "**#{agent_name}:**\n#{message.content}"
+    "*#{agent_name}:*\n\n#{message.content}"
   end
 
   def should_add_agent_prefix?(message)
